@@ -186,6 +186,10 @@ public class FarmingXP
                 return "Flower";
             case HERB:
                 return "Herb";
+            case HOP:
+                return "Hops";
+            case BUSH:
+                return "Bush";
             case TREE:
                 return "Tree";
             default:
