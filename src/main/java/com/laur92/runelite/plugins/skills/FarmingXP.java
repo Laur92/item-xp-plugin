@@ -192,6 +192,8 @@ public class FarmingXP
                 return "Bush";
             case TREE:
                 return "Tree";
+            case FRUIT_TREE:
+                return "Fruit tree";
             default:
                 return "Unknown";
         }
