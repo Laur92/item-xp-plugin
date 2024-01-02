@@ -3,6 +3,7 @@ package com.laur92.runelite.plugins.skills;
 import com.laur92.runelite.plugins.ItemXPConfig;
 import com.laur92.runelite.plugins.skills.farming.FarmingItem;
 import com.laur92.runelite.plugins.skills.farming.FarmingItems;
+import com.laur92.runelite.plugins.skills.farming.FarmingPatchType;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.ui.SkillColor;
 import net.runelite.client.util.ColorUtil;
@@ -87,8 +88,11 @@ public class FarmingXP
         {
             sb.append(ColorUtil.wrapWithColorTag("Harvest: ", harvestColor));
             sb.append(df.format(item.getHarvestXP()));
-            sb.append("xp per ");
-            sb.append(item.getName());
+            if(item.getPatchType() != FarmingPatchType.FLOWER)
+            {
+                sb.append("xp per ");
+                sb.append(item.getName());
+            }
 
             var minXP = df.format(item.getHarvestXP() * item.getMinHarvestQuantity());
             var maxXP = df.format(item.getHarvestXP() * item.getMaxHarvestQuantity());
@@ -102,9 +106,13 @@ public class FarmingXP
                 sb.append(item.getMaxHarvestQuantity());
                 sb.append(" ");
                 sb.append(item.getMaxHarvestQuantity() > 1 ? item.getPlural_name() : item.getName());
-                sb.append("; max ");
-                sb.append(maxXP);
-                sb.append("xp)");
+                if(item.getPatchType() != FarmingPatchType.FLOWER)
+                {
+                    sb.append("; max ");
+                    sb.append(maxXP);
+                    sb.append("xp");
+                }
+                sb.append(")");
                 sb.append(ColorUtil.CLOSING_COLOR_TAG);
             }
             else
@@ -116,9 +124,13 @@ public class FarmingXP
                     sb.append(item.getMinHarvestQuantity());
                     sb.append(" ");
                     sb.append(item.getMinHarvestQuantity() > 1 ? item.getPlural_name() : item.getName());
-                    sb.append("; min ");
-                    sb.append(minXP);
-                    sb.append("xp)");
+                    if(item.getPatchType() != FarmingPatchType.FLOWER)
+                    {
+                        sb.append("; min ");
+                        sb.append(minXP);
+                        sb.append("xp");
+                    }
+                    sb.append(")");
                     sb.append(ColorUtil.CLOSING_COLOR_TAG);
                 }
                 else
@@ -132,11 +144,15 @@ public class FarmingXP
                         sb.append(item.getMaxHarvestQuantity());
                         sb.append(" ");
                         sb.append(item.getMaxHarvestQuantity() > 1 ? item.getPlural_name() : item.getName());
-                        sb.append("; ");
-                        sb.append(minXP);
-                        sb.append("-");
-                        sb.append(maxXP);
-                        sb.append("xp)");
+                        if(item.getPatchType() != FarmingPatchType.FLOWER)
+                        {
+                            sb.append("; ");
+                            sb.append(minXP);
+                            sb.append("-");
+                            sb.append(maxXP);
+                            sb.append("xp");
+                        }
+                        sb.append(")");
                         sb.append(ColorUtil.CLOSING_COLOR_TAG);
                     }
                     else
@@ -146,9 +162,13 @@ public class FarmingXP
                         sb.append(item.getMinHarvestQuantity());
                         sb.append(" ");
                         sb.append(item.getMinHarvestQuantity() > 1 ? item.getPlural_name() : item.getName());
-                        sb.append("; ");
-                        sb.append(minXP);
-                        sb.append("xp)");
+                        if(item.getPatchType() != FarmingPatchType.FLOWER)
+                        {
+                            sb.append("; ");
+                            sb.append(minXP);
+                            sb.append("xp");
+                        }
+                        sb.append(")");
                         sb.append(ColorUtil.CLOSING_COLOR_TAG);
                     }
                 }

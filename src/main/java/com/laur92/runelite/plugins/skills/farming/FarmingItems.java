@@ -169,7 +169,7 @@ public enum FarmingItems
             .build()),
 
     WHITE_LILY_SEED(FarmingItem.builder()
-            .itemIDs(ImmutableSet.of(ItemID.NASTURTIUM_SEED))
+            .itemIDs(ImmutableSet.of(ItemID.WHITE_LILY_SEED))
             .name("white lily")
             .plural_name("white lilies")
             .level(58)
