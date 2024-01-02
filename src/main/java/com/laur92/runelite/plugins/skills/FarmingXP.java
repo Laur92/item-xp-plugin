@@ -164,6 +164,8 @@ public class FarmingXP
                 return "Allotment";
             case FLOWER:
                 return "Flower";
+            case HERB:
+                return "Herb";
             case TREE:
                 return "Tree";
             default:
