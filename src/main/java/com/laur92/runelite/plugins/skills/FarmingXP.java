@@ -216,31 +216,31 @@ public class FarmingXP
 
         if(minXP == maxXP)
         {
-            sb.append(minXP);
+            sb.append(df.format(minXP));
         }
         else
         {
             if(calc.minHarvestXP == 0)
             {
                 sb.append("max ");
-                sb.append(maxXP);
+                sb.append(df.format(maxXP));
             }
             else if(calc.maxHarvestXP == 0)
             {
                 sb.append("min ");
-                sb.append(maxXP);
+                sb.append(df.format(minXP));
             }
             else
             {
-                sb.append(minXP);
+                sb.append(df.format(minXP));
                 sb.append("-");
-                sb.append(maxXP);
+                sb.append(df.format(maxXP));
             }
 
             if(config.showFarmingExpectedYield())
             {
                 sb.append(" (expected ");
-                sb.append(expectedXP);
+                sb.append(df.format(expectedXP));
                 sb.append(")");
             }
         }
@@ -297,8 +297,8 @@ public class FarmingXP
 
         public FarmingXPCalc(FarmingItem item, int numTimes)
         {
-            plantXP = item.getPlantXP();
-            checkHealthXP = item.getCheckHealthXP();
+            plantXP = item.getPlantXP() * numTimes;
+            checkHealthXP = item.getCheckHealthXP() * numTimes;
 
             CompostType compost = config.compostType().compost;
 
@@ -308,14 +308,14 @@ public class FarmingXP
                 case HERB:
                 case HOP:
                     //Harvest Lives
-                    minHarvestQuantity = compost.getHarvestLives();
+                    minHarvestQuantity = compost.getHarvestLives() * numTimes;
                     usesHarvestLives = true;
                     break;
                 case FLOWER:
                 case BUSH:
                     //Fixed
-                    minHarvestQuantity = item.getMinHarvestQuantity();
-                    maxHarvestQuantity = item.getMaxHarvestQuantity();
+                    minHarvestQuantity = item.getMinHarvestQuantity() * numTimes;
+                    maxHarvestQuantity = item.getMaxHarvestQuantity() * numTimes;
                     break;
                 case TREE:
                     //Harvest not applicable
@@ -324,7 +324,10 @@ public class FarmingXP
 
             if(usesHarvestLives)
             {
-                expectedHarvestQuantity = 7; //TODO: Calculate this properly. This is a holding value.
+                //TODO: Calculate this properly. This is a holding value.
+                expectedHarvestQuantity = (int)Math.round(
+                        calculateExpectedYield(client.getBoostedSkillLevel(Skill.FARMING),
+                                40, 255, compost.getHarvestLives()) * numTimes);
             }
             else
             {
@@ -343,6 +346,20 @@ public class FarmingXP
                 maxHarvestXP = item.getHarvestXP();
                 expectedHarvestXP = item.getHarvestXP();
             }
+        }
+
+        //Formula from: https://oldschool.runescape.wiki/w/Farming#Variable_crop_yield
+        private double calculateExpectedYield(int farmingLevel, int minCTS, int maxCTS, int harvestLives)
+        {
+            var modifiedMinCTS = minCTS;
+            var modifiedMaxCTS = maxCTS;
+
+            //TODO: handle boosts
+            var cts = (Math.floor(modifiedMinCTS*(99-(double)farmingLevel)/98)
+                            +Math.floor(modifiedMaxCTS*((double)farmingLevel-1)/98)
+                            +1)
+                    /256;
+            return harvestLives/(1-cts);
         }
     }
 }
