@@ -4,6 +4,8 @@ import com.laur92.runelite.plugins.ItemXPConfig;
 import com.laur92.runelite.plugins.skills.farming.FarmingItem;
 import com.laur92.runelite.plugins.skills.farming.FarmingItems;
 import com.laur92.runelite.plugins.skills.farming.FarmingPatchType;
+import net.runelite.api.Client;
+import net.runelite.api.Skill;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.ui.SkillColor;
 import net.runelite.client.util.ColorUtil;
@@ -18,6 +20,7 @@ import static com.laur92.runelite.plugins.ItemXPPlugin.NEW_LINE;
 public class FarmingXP
 {
     private final ItemXPConfig config;
+    private final Client client;
 
     private static final Color plantColor = new Color(99, 46, 23);
     private static final Color checkHealthColor = new Color(92, 217, 197);
@@ -25,9 +28,10 @@ public class FarmingXP
     private static final DecimalFormat df = new DecimalFormat("#,##0.#");
 
     @Inject
-    public FarmingXP(ItemXPConfig config)
+    public FarmingXP(ItemXPConfig config, Client client)
     {
         this.config = config;
+        this.client = client;
     }
 
     public StringBuilder getFarmingToolTip(int itemID)
@@ -38,13 +42,15 @@ public class FarmingXP
         if(item == null) return null;
 
         StringBuilder sb = new StringBuilder();
+        var currentLevel = client.getBoostedSkillLevel(Skill.FARMING);
 
         sb.append(ColorUtil.wrapWithColorTag("Farming", SkillColor.FARMING.getColor()));
         if(config.showLevelRequirement()) {
             sb.append(ColorUtil.wrapWithColorTag(" (lv ", JagexColors.DARK_ORANGE_INTERFACE_TEXT));
-            sb.append(item.getLevel());
+            sb.append(ColorUtil.wrapWithColorTag(Integer.toString(item.getLevel()), currentLevel >= item.getLevel() ? Color.GREEN : Color.RED));
             sb.append(ColorUtil.wrapWithColorTag(")", JagexColors.DARK_ORANGE_INTERFACE_TEXT));
         }
+
         sb.append(NEW_LINE);
         sb.append(getPatchType(item));
         sb.append(" patch");
