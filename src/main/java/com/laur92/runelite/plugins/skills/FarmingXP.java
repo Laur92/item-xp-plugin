@@ -8,6 +8,7 @@ import com.laur92.runelite.plugins.skills.farming.FarmingPatchType;
 import lombok.Getter;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
+import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.ui.SkillColor;
 import net.runelite.client.util.ColorUtil;
@@ -48,9 +49,9 @@ public class FarmingXP
 
         sb.append(ColorUtil.wrapWithColorTag("Farming", SkillColor.FARMING.getColor()));
         if(config.showLevelRequirement()) {
-            sb.append(ColorUtil.wrapWithColorTag(" (lv ", JagexColors.DARK_ORANGE_INTERFACE_TEXT));
+            sb.append(ColorUtil.wrapWithColorTag(" (lv ", ColorScheme.BRAND_ORANGE));
             sb.append(ColorUtil.wrapWithColorTag(Integer.toString(item.getLevel()), currentLevel >= item.getLevel() ? Color.GREEN : Color.RED));
-            sb.append(ColorUtil.wrapWithColorTag(")", JagexColors.DARK_ORANGE_INTERFACE_TEXT));
+            sb.append(ColorUtil.wrapWithColorTag(")", ColorScheme.BRAND_ORANGE));
         }
 
         sb.append(NEW_LINE);
@@ -324,7 +325,6 @@ public class FarmingXP
 
             if(usesHarvestLives)
             {
-                //TODO: Calculate this properly. This is a holding value.
                 expectedHarvestQuantity = (int)Math.round(
                         calculateExpectedYield(client.getBoostedSkillLevel(Skill.FARMING),
                                 item.getMinCTS(), item.getMaxCTS(), compost.getHarvestLives()) * numTimes);
@@ -352,12 +352,31 @@ public class FarmingXP
         //CTS values from: https://oldschool.runescape.wiki/w/Talk:Farming#Yield_rates_of_various_crops
         private double calculateExpectedYield(int farmingLevel, int minCTS, int maxCTS, int harvestLives)
         {
-            var modifiedMinCTS = minCTS;
-            var modifiedMaxCTS = maxCTS;
+            double modifiedMinCTS = minCTS;
+            double modifiedMaxCTS = maxCTS;
 
-            //TODO: handle boosts
-            var cts = (Math.floor(modifiedMinCTS*(99-(double)farmingLevel)/98)
-                            +Math.floor(modifiedMaxCTS*((double)farmingLevel-1)/98)
+            double itemBoost = 0;
+            if(config.farmingUsingMagicSecateurs())
+            {
+                itemBoost += 0.1;
+            }
+            if(config.farmingUsingSkillCape())
+            {
+                itemBoost += 0.05;
+            }
+            modifiedMinCTS = Math.floor(modifiedMinCTS * (1+itemBoost));
+            modifiedMaxCTS = Math.floor(modifiedMaxCTS * (1+itemBoost));
+
+            //TODO: Work out whether to handle diary boosts...
+
+            if(config.farmingUsingAttas())
+            {
+                modifiedMinCTS = Math.floor(modifiedMinCTS * (1+0.05));
+                modifiedMaxCTS = Math.floor(modifiedMaxCTS * (1+0.05));
+            }
+
+            var cts = (Math.floor(modifiedMinCTS*(99-farmingLevel)/98)
+                            +Math.floor(modifiedMaxCTS*(farmingLevel-1)/98)
                             +1)
                     /256;
             return harvestLives/(1-cts);

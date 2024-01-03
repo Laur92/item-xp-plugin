@@ -14,6 +14,9 @@ public interface ItemXPConfig extends Config
     String FARMING_SHOW_RANGE = "FARMING_SHOW_RANGE";
     String FARMING_SHOW_EXPECTED_YIELD = "FARMING_SHOW_EXPECTED_YIELD";
     String FARMING_COMPOST_TYPE = "FARMING_COMPOST_TYPE";
+    String FARMING_MAGIC_SECATEURS = "FARMING_MAGIC_SECATEURS";
+    String FARMING_SKILL_CAPE = "FARMING_SKILL_CAPE";
+    String FARMING_ATTAS = "FARMING_ATTAS";
 
 
 
@@ -59,7 +62,8 @@ public interface ItemXPConfig extends Config
             keyName = SHOW_SKILL_FARMING,
             name = "Farming",
             section = skillsSection,
-            description = "Show farming related XP on items"
+            description = "Show farming related XP on items",
+            warning = "This plugin does not take into account the effects of disease or death; all plants are assumed to survive"
     )
     default boolean showFarmingSkill()
     {
@@ -71,7 +75,7 @@ public interface ItemXPConfig extends Config
             keyName = FARMING_SHOW_RANGE,
             name = "Show Harvest Range",
             section = farmingSkillSection,
-            description = "Show the min/max yield from plants"
+            description = "Show min/max yield from plants"
     )
     default boolean showFarmingHarvestRange() { return true; }
 
@@ -80,17 +84,47 @@ public interface ItemXPConfig extends Config
             keyName = FARMING_SHOW_EXPECTED_YIELD,
             name = "Show Expected Harvest",
             section = farmingSkillSection,
-            description = "Show the average expected yield for a crop, see below values"
+            description = "Show the expected number of items harvested for crops",
+            warning = "This will be based on other settings in this section"
     )
     default boolean showFarmingExpectedYield() { return true; }
 
     @ConfigItem(
             position = 2,
             keyName = FARMING_COMPOST_TYPE,
-            name = "Type of compost used",
+            name = "Compost",
             section = farmingSkillSection,
-            description = "The type of compost you use, for expected yield calculations"
+            description = "The type of compost you use, for harvest calculations"
     )
     default Compost compostType() { return Compost.NONE; }
+
+
+    @ConfigItem(
+            position = 3,
+            keyName = FARMING_MAGIC_SECATEURS,
+            name = "Magic Secateurs",
+            section = farmingSkillSection,
+            description = "If you are wielding magic secateurs for harvest bonus"
+    )
+    default boolean farmingUsingMagicSecateurs() { return false; }
+
+    @ConfigItem(
+            position = 4,
+            keyName = FARMING_SKILL_CAPE,
+            name = "Skill Cape",
+            section = farmingSkillSection,
+            description = "If you are wearing a farming or max cape"
+    )
+    default boolean farmingUsingSkillCape() { return false; }
+
+    @ConfigItem(
+            position = 5,
+            keyName = FARMING_ATTAS,
+            name = "Attas Plant",
+            section = farmingSkillSection,
+            description = "If you have an attas plant growing in the anima patch at the Farming Guild"
+    )
+    default boolean farmingUsingAttas() { return false; }
+
 
 }
