@@ -34,7 +34,7 @@ public class FarmingXP
         this.client = client;
     }
 
-    public StringBuilder getFarmingToolTip(int itemID)
+    public StringBuilder getFarmingToolTip(int itemID, int quantity)
     {
         if(!config.showFarmingSkill()) return null;
 
@@ -56,14 +56,16 @@ public class FarmingXP
         sb.append(" patch");
         sb.append(NEW_LINE);
 
-        addPlant(sb, item);
+        addPlant(sb, item, quantity);
         addCheckHealth(sb, item);
         addHarvest(sb, item);
+        addTotal(sb, item);
+        addUseAll(sb, item, quantity);
 
         return sb;
     }
 
-    private static void addPlant(StringBuilder sb, FarmingItem item)
+    private static void addPlant(StringBuilder sb, FarmingItem item, int quantity)
     {
         sb.append(ColorUtil.wrapWithColorTag("Plant: ", plantColor));
         sb.append(df.format(item.getPlantXP()));
@@ -71,6 +73,7 @@ public class FarmingXP
         if(item.getPlantQuantity() > 1)
         {
             sb.append(ColorUtil.wrapWithColorTag(" (", JagexColors.DARK_ORANGE_INTERFACE_TEXT));
+            sb.append(ColorUtil.wrapWithColorTag(Integer.toString(item.getPlantQuantity()), quantity >= item.getPlantQuantity() ? Color.GREEN : Color.RED));
             sb.append(item.getPlantQuantity());
             sb.append(ColorUtil.wrapWithColorTag(" seeds)", JagexColors.DARK_ORANGE_INTERFACE_TEXT));
         }
@@ -180,6 +183,16 @@ public class FarmingXP
                 }
             }
         }
+    }
+
+    private static void addTotal(StringBuilder sb, FarmingItem item)
+    {
+
+    }
+
+    private static void addUseAll(StringBuilder sb, FarmingItem item, int quantity)
+    {
+
     }
 
     private static String getPatchType(FarmingItem item)

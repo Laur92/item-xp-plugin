@@ -65,10 +65,12 @@ public class ItemXPOverlay extends Overlay
 
         if (itemId == -1) return null;
 
+        var quantity = widget.getItemQuantity();
+
         var sb = new StringBuilder();
         var hasTooltip = false;
 
-        var farming = farmingXP.getFarmingToolTip(itemId);
+        var farming = farmingXP.getFarmingToolTip(itemId, quantity);
         if(farming != null)
         {
             sb.append(farming);
