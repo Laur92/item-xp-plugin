@@ -15,7 +15,6 @@ public enum FarmingItems
             .plantXP(8)
             .plantQuantity(3)
             .harvestXP(9)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -27,7 +26,6 @@ public enum FarmingItems
             .plantXP(9.5)
             .plantQuantity(3)
             .harvestXP(10.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -39,7 +37,6 @@ public enum FarmingItems
             .plantXP(10)
             .plantQuantity(3)
             .harvestXP(11.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -51,7 +48,6 @@ public enum FarmingItems
             .plantXP(12.5)
             .plantQuantity(3)
             .harvestXP(14)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -63,7 +59,6 @@ public enum FarmingItems
             .plantXP(17)
             .plantQuantity(3)
             .harvestXP(19)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -75,7 +70,6 @@ public enum FarmingItems
             .plantXP(26)
             .plantQuantity(3)
             .harvestXP(29)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -87,7 +81,6 @@ public enum FarmingItems
             .plantXP(48.5)
             .plantQuantity(3)
             .harvestXP(54.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -99,7 +92,6 @@ public enum FarmingItems
             .plantXP(82)
             .plantQuantity(3)
             .harvestXP(82)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.ALLOTMENT)
             .build()),
 
@@ -189,7 +181,6 @@ public enum FarmingItems
             .plantXP(11)
             .plantQuantity(1)
             .harvestXP(12.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -201,7 +192,6 @@ public enum FarmingItems
             .plantXP(13.5)
             .plantQuantity(1)
             .harvestXP(15)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -213,7 +203,6 @@ public enum FarmingItems
             .plantXP(16)
             .plantQuantity(1)
             .harvestXP(18)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -225,7 +214,6 @@ public enum FarmingItems
             .plantXP(21.5)
             .plantQuantity(1)
             .harvestXP(24)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -237,7 +225,6 @@ public enum FarmingItems
             .plantXP(105)
             .plantQuantity(1)
             .harvestXP(45)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -249,7 +236,6 @@ public enum FarmingItems
             .plantXP(27)
             .plantQuantity(1)
             .harvestXP(30.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -261,7 +247,6 @@ public enum FarmingItems
             .plantXP(34)
             .plantQuantity(1)
             .harvestXP(38.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -273,7 +258,6 @@ public enum FarmingItems
             .plantXP(43)
             .plantQuantity(1)
             .harvestXP(48.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -285,7 +269,6 @@ public enum FarmingItems
             .plantXP(54.5)
             .plantQuantity(1)
             .harvestXP(61.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -297,7 +280,6 @@ public enum FarmingItems
             .plantXP(69)
             .plantQuantity(1)
             .harvestXP(78)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -309,7 +291,6 @@ public enum FarmingItems
             .plantXP(87.5)
             .plantQuantity(1)
             .harvestXP(98.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -321,7 +302,6 @@ public enum FarmingItems
             .plantXP(106.5)
             .plantQuantity(1)
             .harvestXP(120)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -333,7 +313,6 @@ public enum FarmingItems
             .plantXP(134.5)
             .plantQuantity(1)
             .harvestXP(151.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -345,7 +324,6 @@ public enum FarmingItems
             .plantXP(170.5)
             .plantQuantity(1)
             .harvestXP(192)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -357,7 +335,6 @@ public enum FarmingItems
             .plantXP(199.5)
             .plantQuantity(1)
             .harvestXP(244.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HERB)
             .build()),
 
@@ -369,7 +346,6 @@ public enum FarmingItems
             .plantXP(8.5)
             .plantQuantity(4)
             .harvestXP(9.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HOP)
             .build()),
 
@@ -381,7 +357,6 @@ public enum FarmingItems
             .plantXP(9)
             .plantQuantity(4)
             .harvestXP(10)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HOP)
             .build()),
 
@@ -393,7 +368,6 @@ public enum FarmingItems
             .plantXP(10.9)
             .plantQuantity(4)
             .harvestXP(12)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HOP)
             .build()),
 
@@ -405,7 +379,6 @@ public enum FarmingItems
             .plantXP(13)
             .plantQuantity(4)
             .harvestXP(14.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HOP)
             .build()),
 
@@ -417,7 +390,6 @@ public enum FarmingItems
             .plantXP(14.5)
             .plantQuantity(4)
             .harvestXP(16)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HOP)
             .build()),
 
@@ -429,7 +401,6 @@ public enum FarmingItems
             .plantXP(17.5)
             .plantQuantity(4)
             .harvestXP(19.5)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HOP)
             .build()),
 
@@ -441,7 +412,6 @@ public enum FarmingItems
             .plantXP(23)
             .plantQuantity(4)
             .harvestXP(26)
-            .minHarvestQuantity(3)
             .patchType(FarmingPatchType.HOP)
             .build()),
 
