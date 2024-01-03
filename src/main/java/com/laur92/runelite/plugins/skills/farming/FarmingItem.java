@@ -20,5 +20,7 @@ public class FarmingItem
     private double harvestXP;
     private int minHarvestQuantity;
     private int maxHarvestQuantity;
+    private int minCTS;
+    private int maxCTS;
 }
 

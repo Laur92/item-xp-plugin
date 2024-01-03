@@ -327,7 +327,7 @@ public class FarmingXP
                 //TODO: Calculate this properly. This is a holding value.
                 expectedHarvestQuantity = (int)Math.round(
                         calculateExpectedYield(client.getBoostedSkillLevel(Skill.FARMING),
-                                40, 255, compost.getHarvestLives()) * numTimes);
+                                item.getMinCTS(), item.getMaxCTS(), compost.getHarvestLives()) * numTimes);
             }
             else
             {
@@ -349,6 +349,7 @@ public class FarmingXP
         }
 
         //Formula from: https://oldschool.runescape.wiki/w/Farming#Variable_crop_yield
+        //CTS values from: https://oldschool.runescape.wiki/w/Talk:Farming#Yield_rates_of_various_crops
         private double calculateExpectedYield(int farmingLevel, int minCTS, int maxCTS, int harvestLives)
         {
             var modifiedMinCTS = minCTS;
