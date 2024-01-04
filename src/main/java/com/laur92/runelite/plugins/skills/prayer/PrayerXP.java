@@ -1,10 +1,6 @@
 package com.laur92.runelite.plugins.skills.prayer;
 
 import com.laur92.runelite.plugins.ItemXPConfig;
-import com.laur92.runelite.plugins.skills.farming.Compost;
-import com.laur92.runelite.plugins.skills.farming.CompostType;
-import com.laur92.runelite.plugins.skills.farming.FarmingItem;
-import com.laur92.runelite.plugins.skills.farming.FarmingItems;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import net.runelite.client.ui.ColorScheme;

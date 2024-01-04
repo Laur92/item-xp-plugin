@@ -2,6 +2,7 @@ package com.laur92.runelite.plugins;
 
 import com.google.inject.Inject;
 import com.laur92.runelite.plugins.skills.farming.FarmingXP;
+import com.laur92.runelite.plugins.skills.prayer.PrayerXP;
 import net.runelite.api.Client;
 import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.InterfaceID;
@@ -17,16 +18,18 @@ public class ItemXPOverlay extends Overlay
 {
     private final TooltipManager tooltipManager;
     private final FarmingXP farmingXP;
+    private final PrayerXP prayerXP;
     private final Client client;
     private final ItemManager itemManager;
 
     @Inject
     public ItemXPOverlay(Client client, TooltipManager tooltipManager,
-                         FarmingXP farmingXP, ItemManager itemManager)
+                         FarmingXP farmingXP, PrayerXP prayerXP, ItemManager itemManager)
     {
         this.client = client;
         this.tooltipManager = tooltipManager;
         this.farmingXP = farmingXP;
+        this.prayerXP = prayerXP;
         this.itemManager = itemManager;
     }
 
@@ -79,6 +82,13 @@ public class ItemXPOverlay extends Overlay
         if(farming != null)
         {
             sb.append(farming);
+            hasTooltip = true;
+        }
+
+        var prayer = prayerXP.getPrayerToolTip(itemId, quantity);
+        if(prayer != null)
+        {
+            sb.append(prayer);
             hasTooltip = true;
         }
 
