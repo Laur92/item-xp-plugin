@@ -10,6 +10,7 @@ import net.runelite.client.config.ConfigSection;
 public interface ItemXPConfig extends Config
 {
     String SHOW_LEVEL_REQUIREMENT = "SHOW_LEVEL_REQUIREMENT";
+    String SHOW_STACK_CALCULATIONS = "SHOW_STACK_CALCULATIONS";
     String SHOW_SKILL_FARMING = "SHOW_SKILL_FARMING";
     String FARMING_SHOW_RANGE = "FARMING_SHOW_RANGE";
     String FARMING_SHOW_EXPECTED_YIELD = "FARMING_SHOW_EXPECTED_YIELD";
@@ -56,6 +57,15 @@ public interface ItemXPConfig extends Config
         return true;
     }
 
+    @ConfigItem(
+            position = 1,
+            keyName = SHOW_STACK_CALCULATIONS,
+            name = "Show Stack XP",
+            section = overallSection,
+            description = "Also show XP for using entire stack in addition to per item"
+    )
+    default boolean showStackCalculations() { return true; }
+
 
     @ConfigItem(
             position = 0,
@@ -73,16 +83,16 @@ public interface ItemXPConfig extends Config
     @ConfigItem(
             position = 0,
             keyName = FARMING_SHOW_RANGE,
-            name = "Show Harvest Range",
+            name = "Show Yield Range",
             section = farmingSkillSection,
             description = "Show min/max yield from plants"
     )
-    default boolean showFarmingHarvestRange() { return true; }
+    default boolean showFarmingYieldRange() { return true; }
 
     @ConfigItem(
             position = 1,
             keyName = FARMING_SHOW_EXPECTED_YIELD,
-            name = "Show Expected Harvest",
+            name = "Show Expected Yield",
             section = farmingSkillSection,
             description = "Show the expected number of items harvested for crops",
             warning = "This will be based on other settings in this section"

@@ -64,10 +64,19 @@ public class FarmingXP
         addPlant(sb, item, calc, quantity);
         addCheckHealth(sb, item, calc);
         addHarvest(sb, item);
-        if(config.showFarmingHarvestRange()) addHarvestRange(sb, item, calc);
-        if(config.showFarmingExpectedYield()) addExpectedHarvest(sb, item, calc);
-        addTotal(sb, item, calc);
-        addUseAll(sb, item, calc, quantity);
+        if(config.showFarmingYieldRange()) addYieldRange(sb, item, calc);
+        if(config.showFarmingExpectedYield()) addExpectedYield(sb, item, calc);
+        addTotalRange(sb, calc);
+        if(config.showFarmingExpectedYield()) addTotalExpected(sb, calc);
+
+        if(config.showStackCalculations())
+        {
+            int numPlantings = quantity / item.getPlantQuantity();
+            var stackCalc =  new FarmingXPCalc(item, numPlantings);
+            if(config.showFarmingExpectedYield()) addStackYield(sb, item, stackCalc, numPlantings);
+            addStackRange(sb, stackCalc);
+            if(config.showFarmingExpectedYield()) addStackExpected(sb, stackCalc);
+        }
 
         return sb;
     }
@@ -111,14 +120,14 @@ public class FarmingXP
         }
     }
 
-    private void addHarvestRange(StringBuilder sb, FarmingItem item, FarmingXPCalc calc)
+    private void addYieldRange(StringBuilder sb, FarmingItem item, FarmingXPCalc calc)
     {
         if(calc.minHarvestQuantity == 0 && calc.maxHarvestQuantity == 0) return;
 
         sb.append(NEW_LINE);
         sb.append(ColorUtil.colorTag(Color.GRAY));
 
-        sb.append("Harvest Range: ");
+        sb.append("Yield Range: ");
         if(calc.minHarvestQuantity == 0)
         // we're limited at the top of the range
         {
@@ -182,38 +191,34 @@ public class FarmingXP
     }
 
 
-    private void addExpectedHarvest(StringBuilder sb, FarmingItem item, FarmingXPCalc calc)
+    private void addExpectedYield(StringBuilder sb, FarmingItem item, FarmingXPCalc calc)
     {
         if(calc.expectedHarvestQuantity == 0) return;
 
         sb.append(NEW_LINE);
         sb.append(ColorUtil.colorTag(Color.ORANGE));
 
-        sb.append("Harvest Expected Yield: ");
-        // we've got an exact number
+        sb.append("Expected Yield: ");
+        sb.append(calc.expectedHarvestQuantity);
+        sb.append(" ");
+        sb.append(calc.expectedHarvestQuantity > 1 ? item.getPlural_name() : item.getName());
+        if(item.getPatchType() != FarmingPatchType.FLOWER)
         {
-            sb.append(calc.expectedHarvestQuantity);
-            sb.append(" ");
-            sb.append(calc.expectedHarvestQuantity > 1 ? item.getPlural_name() : item.getName());
-            if(item.getPatchType() != FarmingPatchType.FLOWER)
-            {
-                sb.append(" (");
-                sb.append(df.format(calc.expectedHarvestXP));
-                sb.append("xp)");
-            }
+            sb.append(" (");
+            sb.append(df.format(calc.expectedHarvestXP));
+            sb.append("xp)");
         }
 
         sb.append(ColorUtil.CLOSING_COLOR_TAG);
     }
 
-    private void addTotal(StringBuilder sb, FarmingItem item, FarmingXPCalc calc)
+    private void addTotalRange(StringBuilder sb, FarmingXPCalc calc)
     {
         sb.append(NEW_LINE);
-        sb.append("Total xp: ");
+        sb.append("Total XP Range: ");
 
         var minXP = calc.plantXP + calc.checkHealthXP + calc.minHarvestXP;
         var maxXP = calc.plantXP + calc.checkHealthXP + calc.maxHarvestXP;
-        var expectedXP = calc.plantXP + calc.checkHealthXP + calc.expectedHarvestXP;
 
         if(minXP == maxXP)
         {
@@ -237,19 +242,82 @@ public class FarmingXP
                 sb.append("-");
                 sb.append(df.format(maxXP));
             }
-
-            if(config.showFarmingExpectedYield())
-            {
-                sb.append(" (expected ");
-                sb.append(df.format(expectedXP));
-                sb.append(")");
-            }
         }
+        sb.append("xp");
     }
 
-    private void addUseAll(StringBuilder sb, FarmingItem item, FarmingXPCalc calc, int quantity)
+    private void addTotalExpected(StringBuilder sb, FarmingXPCalc calc)
     {
+        var expectedXP = calc.plantXP + calc.checkHealthXP + calc.expectedHarvestXP;
+        sb.append(NEW_LINE);
+        sb.append("Total Expected XP: ");
+        sb.append(df.format(expectedXP));
+        sb.append("xp");
+    }
 
+    private void addStackYield(StringBuilder sb, FarmingItem item, FarmingXPCalc calc, int numPlantings)
+    {
+        if(calc.expectedHarvestQuantity == 0) return;
+
+        sb.append(NEW_LINE);
+        sb.append(ColorUtil.colorTag(Color.MAGENTA));
+
+        sb.append("Stack Expected Yield: ");
+        sb.append(calc.expectedHarvestQuantity);
+        sb.append(" ");
+        sb.append(calc.expectedHarvestQuantity > 1 ? item.getPlural_name() : item.getName());
+        sb.append(" (");
+        sb.append(df.format(numPlantings));
+        sb.append(" plantings)");
+
+        sb.append(ColorUtil.CLOSING_COLOR_TAG);
+    }
+
+    private void addStackRange(StringBuilder sb, FarmingXPCalc calc)
+    {
+        sb.append(NEW_LINE);
+        sb.append(ColorUtil.colorTag(Color.CYAN));
+        sb.append("Stack Total XP Range: ");
+
+        var minXP = calc.plantXP + calc.checkHealthXP + calc.minHarvestXP;
+        var maxXP = calc.plantXP + calc.checkHealthXP + calc.maxHarvestXP;
+
+        if(minXP == maxXP)
+        {
+            sb.append(df.format(minXP));
+        }
+        else
+        {
+            if(calc.minHarvestXP == 0)
+            {
+                sb.append("max ");
+                sb.append(df.format(maxXP));
+            }
+            else if(calc.maxHarvestXP == 0)
+            {
+                sb.append("min ");
+                sb.append(df.format(minXP));
+            }
+            else
+            {
+                sb.append(df.format(minXP));
+                sb.append("-");
+                sb.append(df.format(maxXP));
+            }
+        }
+        sb.append("xp");
+        sb.append(ColorUtil.CLOSING_COLOR_TAG);
+    }
+
+    private void addStackExpected(StringBuilder sb, FarmingXPCalc calc)
+    {
+        var expectedXP = calc.plantXP + calc.checkHealthXP + calc.expectedHarvestXP;
+        sb.append(NEW_LINE);
+        sb.append(ColorUtil.colorTag(Color.CYAN));
+        sb.append("Stack Total Expected XP: ");
+        sb.append(df.format(expectedXP));
+        sb.append("xp");
+        sb.append(ColorUtil.CLOSING_COLOR_TAG);
     }
 
     private static String getPatchType(FarmingItem item)
