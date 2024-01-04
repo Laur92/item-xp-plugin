@@ -12,6 +12,7 @@ public interface ItemXPConfig extends Config
     String SHOW_LEVEL_REQUIREMENT = "SHOW_LEVEL_REQUIREMENT";
     String SHOW_STACK_CALCULATIONS = "SHOW_STACK_CALCULATIONS";
     String SHOW_SKILL_FARMING = "SHOW_SKILL_FARMING";
+    String SHOW_SKILL_PRAYER = "SHOW_SKILL_PRAYER";
     String FARMING_SHOW_RANGE = "FARMING_SHOW_RANGE";
     String FARMING_SHOW_EXPECTED_YIELD = "FARMING_SHOW_EXPECTED_YIELD";
     String FARMING_COMPOST_TYPE = "FARMING_COMPOST_TYPE";
@@ -42,6 +43,14 @@ public interface ItemXPConfig extends Config
             closedByDefault = true
     )
     String farmingSkillSection = "FARMING_SKILL_SECTION";
+
+    @ConfigSection(
+            name = "Prayer",
+            description = "Prayer specfic settings",
+            position = 3,
+            closedByDefault = true
+    )
+    String prayerSkillSection = "PRAYER_SKILL_SECTION";
 
 
 
@@ -76,6 +85,17 @@ public interface ItemXPConfig extends Config
             warning = "This plugin does not take into account the effects of disease or death; all plants are assumed to survive"
     )
     default boolean showFarmingSkill()
+    {
+        return true;
+    }
+    @ConfigItem(
+            position = 1,
+            keyName = SHOW_SKILL_PRAYER,
+            name = "Prayer",
+            section = skillsSection,
+            description = "Show prayer related XP on items"
+    )
+    default boolean showPrayerSkill()
     {
         return true;
     }

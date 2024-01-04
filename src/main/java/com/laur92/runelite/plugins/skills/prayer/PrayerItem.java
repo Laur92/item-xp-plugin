@@ -13,6 +13,6 @@ public class PrayerItem
 {
     private Set<Integer> itemIDs;
     private PrayerItemType itemType;
-    private int level;
+    private int level = 1;
     private double xp;
 }
