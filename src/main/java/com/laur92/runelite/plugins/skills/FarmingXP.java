@@ -60,7 +60,7 @@ public class FarmingXP
                 sb.append(ColorUtil.wrapWithColorTag(")", ColorScheme.BRAND_ORANGE));
             }
 
-            sb.append(NEW_LINE);
+            sb.append(" ");
             sb.append(getPatchType(item));
             sb.append(" patch");
             sb.append(NEW_LINE);
@@ -114,35 +114,33 @@ public class FarmingXP
             sb.append(ColorUtil.wrapWithColorTag(Integer.toString(item.getPlantQuantity()), quantity >= item.getPlantQuantity() ? Color.GREEN : Color.RED));
             sb.append(ColorUtil.wrapWithColorTag(" seeds)", JagexColors.DARK_ORANGE_INTERFACE_TEXT));
         }
-        sb.append(NEW_LINE);
     }
 
     private void addCheckHealth(StringBuilder sb, FarmingItem item, FarmingXPCalc calc)
     {
-        if(item.getCheckHealthXP() > 0)
-        {
-            sb.append(ColorUtil.wrapWithColorTag("Check Health: ", checkHealthColor));
-            sb.append(df.format(calc.checkHealthXP));
-            sb.append("xp");
-            sb.append(NEW_LINE);
-        }
+        if (!(item.getCheckHealthXP() > 0)) return;
+
+        sb.append(NEW_LINE);
+        sb.append(ColorUtil.wrapWithColorTag("Check Health: ", checkHealthColor));
+        sb.append(df.format(calc.checkHealthXP));
+        sb.append("xp");
     }
 
     private void addHarvest(StringBuilder sb, FarmingItem item)
     {
-        if(item.getHarvestXP() > 0)
+        if (!(item.getHarvestXP() > 0)) return;
+
+        sb.append(NEW_LINE);
+        sb.append(ColorUtil.wrapWithColorTag("Harvest: ", harvestColor));
+        sb.append(df.format(item.getHarvestXP()));
+        if(item.getPatchType() != FarmingPatchType.FLOWER)
         {
-            sb.append(ColorUtil.wrapWithColorTag("Harvest: ", harvestColor));
-            sb.append(df.format(item.getHarvestXP()));
-            if(item.getPatchType() != FarmingPatchType.FLOWER)
-            {
-                sb.append("xp per ");
-                sb.append(item.getName());
-            }
-            else
-            {
-                sb.append("xp");
-            }
+            sb.append("xp per ");
+            sb.append(item.getName());
+        }
+        else
+        {
+            sb.append("xp");
         }
     }
 
