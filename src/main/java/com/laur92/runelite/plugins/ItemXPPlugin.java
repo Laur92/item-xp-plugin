@@ -11,7 +11,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 @PluginDescriptor(
 	name = "Item XP",
 	description = "A plugin that adds xp potential tooltips on items",
-	tags = {"item", "xp"}
+	tags = {"item", "xp", "farming", "prayer"}
 )
 @Slf4j
 public class ItemXPPlugin extends Plugin
