@@ -6,6 +6,7 @@ import net.runelite.api.Client;
 import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.InterfaceID;
 import net.runelite.api.widgets.WidgetUtil;
+import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
@@ -17,14 +18,16 @@ public class ItemXPOverlay extends Overlay
     private final TooltipManager tooltipManager;
     private final FarmingXP farmingXP;
     private final Client client;
+    private final ItemManager itemManager;
 
     @Inject
     public ItemXPOverlay(Client client, TooltipManager tooltipManager,
-                         FarmingXP farmingXP)
+                         FarmingXP farmingXP, ItemManager itemManager)
     {
         this.client = client;
         this.tooltipManager = tooltipManager;
         this.farmingXP = farmingXP;
+        this.itemManager = itemManager;
     }
 
     @Override
@@ -64,6 +67,8 @@ public class ItemXPOverlay extends Overlay
         }
 
         if (itemId == -1) return null;
+
+        itemId = itemManager.canonicalize(itemId);
 
         var quantity = widget.getItemQuantity();
 

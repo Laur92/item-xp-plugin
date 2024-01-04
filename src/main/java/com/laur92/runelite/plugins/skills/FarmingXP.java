@@ -1,11 +1,9 @@
 package com.laur92.runelite.plugins.skills;
 
 import com.laur92.runelite.plugins.ItemXPConfig;
-import com.laur92.runelite.plugins.skills.farming.CompostType;
-import com.laur92.runelite.plugins.skills.farming.FarmingItem;
-import com.laur92.runelite.plugins.skills.farming.FarmingItems;
-import com.laur92.runelite.plugins.skills.farming.FarmingPatchType;
+import com.laur92.runelite.plugins.skills.farming.*;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import net.runelite.client.ui.ColorScheme;
@@ -20,6 +18,7 @@ import java.text.DecimalFormat;
 
 import static com.laur92.runelite.plugins.ItemXPPlugin.NEW_LINE;
 
+@Slf4j
 public class FarmingXP
 {
     private final ItemXPConfig config;
@@ -39,43 +38,66 @@ public class FarmingXP
 
     public StringBuilder getFarmingToolTip(int itemID, int quantity)
     {
+        if(itemID == -1) return null;
         if(!config.showFarmingSkill()) return null;
 
         FarmingItem item = FarmingItems.getFarmingItem(itemID);
-        if(item == null) return null;
+        CompostType compost = Compost.getCompost(itemID);
+
+        if(item == null && compost == null) return null;
 
         StringBuilder sb = new StringBuilder();
         var currentLevel = client.getBoostedSkillLevel(Skill.FARMING);
 
         sb.append(ColorUtil.wrapWithColorTag("Farming", SkillColor.FARMING.getColor()));
-        if(config.showLevelRequirement()) {
-            sb.append(ColorUtil.wrapWithColorTag(" (lv ", ColorScheme.BRAND_ORANGE));
-            sb.append(ColorUtil.wrapWithColorTag(Integer.toString(item.getLevel()), currentLevel >= item.getLevel() ? Color.GREEN : Color.RED));
-            sb.append(ColorUtil.wrapWithColorTag(")", ColorScheme.BRAND_ORANGE));
-        }
 
-        sb.append(NEW_LINE);
-        sb.append(getPatchType(item));
-        sb.append(" patch");
-        sb.append(NEW_LINE);
-
-        FarmingXPCalc calc = new FarmingXPCalc(item);
-
-        addPlant(sb, item, calc, quantity);
-        addCheckHealth(sb, item, calc);
-        addHarvest(sb, item);
-        if(config.showFarmingYieldRange()) addYieldRange(sb, item, calc);
-        if(config.showFarmingExpectedYield()) addExpectedYield(sb, item, calc);
-        addTotalRange(sb, calc);
-        if(config.showFarmingExpectedYield()) addTotalExpected(sb, calc);
-
-        if(config.showStackCalculations())
+        if(item != null)
         {
-            int numPlantings = quantity / item.getPlantQuantity();
-            var stackCalc =  new FarmingXPCalc(item, numPlantings);
-            if(config.showFarmingExpectedYield()) addStackYield(sb, item, stackCalc, numPlantings);
-            addStackRange(sb, stackCalc);
-            if(config.showFarmingExpectedYield()) addStackExpected(sb, stackCalc);
+            if (config.showLevelRequirement())
+            {
+                sb.append(ColorUtil.wrapWithColorTag(" (lv ", ColorScheme.BRAND_ORANGE));
+                sb.append(ColorUtil.wrapWithColorTag(Integer.toString(item.getLevel()), currentLevel >= item.getLevel() ? Color.GREEN : Color.RED));
+                sb.append(ColorUtil.wrapWithColorTag(")", ColorScheme.BRAND_ORANGE));
+            }
+
+            sb.append(NEW_LINE);
+            sb.append(getPatchType(item));
+            sb.append(" patch");
+            sb.append(NEW_LINE);
+
+            FarmingXPCalc calc = new FarmingXPCalc(item);
+
+            addPlant(sb, item, calc, quantity);
+            addCheckHealth(sb, item, calc);
+            addHarvest(sb, item);
+            if (config.showFarmingYieldRange()) addYieldRange(sb, item, calc);
+            if (config.showFarmingExpectedYield()) addExpectedYield(sb, item, calc);
+            addTotalRange(sb, calc);
+            if (config.showFarmingExpectedYield()) addTotalExpected(sb, calc);
+
+            if (config.showStackCalculations())
+            {
+                int numPlantings = quantity / item.getPlantQuantity();
+                var stackCalc = new FarmingXPCalc(item, numPlantings);
+                if (config.showFarmingExpectedYield()) addStackYield(sb, item, stackCalc, numPlantings);
+                addStackRange(sb, stackCalc);
+                if (config.showFarmingExpectedYield()) addStackExpected(sb, stackCalc);
+            }
+        }
+        if(compost != null)
+        {
+            sb.append(": ");
+            sb.append(df.format(compost.getXp()));
+            sb.append("xp");
+            if(config.showStackCalculations())
+            {
+                sb.append(NEW_LINE);
+                sb.append(ColorUtil.colorTag(Color.CYAN));
+                sb.append("Stack Total: ");
+                sb.append(df.format((long) compost.getXp() * quantity));
+                sb.append("xp");
+                sb.append(ColorUtil.CLOSING_COLOR_TAG);
+            }
         }
 
         return sb;
@@ -116,6 +138,10 @@ public class FarmingXP
             {
                 sb.append("xp per ");
                 sb.append(item.getName());
+            }
+            else
+            {
+                sb.append("xp");
             }
         }
     }
