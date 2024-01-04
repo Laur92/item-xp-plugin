@@ -812,10 +812,118 @@ public enum FarmingItems
             .patchType(FarmingPatchType.ANIMA)
             .build()),
 
+    TEAK_TREE(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.TEAK_SEED, ItemID.TEAK_SAPLING, ItemID.TEAK_SEEDLING, ItemID.TEAK_SEEDLING_W))
+            .name("teak tree")
+            .plural_name("teak trees")
+            .level(35)
+            .plantXP(35)
+            .plantQuantity(1)
+            .checkHealthXP(7290)
+            .patchType(FarmingPatchType.HARDWOOD)
+            .build()),
 
+    MAHOGANY_TREE(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.MAHOGANY_SEED, ItemID.MAHOGANY_SAPLING, ItemID.MAHOGANY_SEEDLING, ItemID.MAHOGANY_SEEDLING_W))
+            .name("mahogany tree")
+            .plural_name("mahogany trees")
+            .level(55)
+            .plantXP(68)
+            .plantQuantity(1)
+            .checkHealthXP(15720)
+            .patchType(FarmingPatchType.HARDWOOD)
+            .build()),
 
+    CALQUAT_TREE(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.CALQUAT_TREE_SEED, ItemID.CALQUAT_SAPLING, ItemID.CALQUAT_SEEDLING, ItemID.CALQUAT_SEEDLING_W))
+            .name("calquat fruit")
+            .plural_name("calquat fruit")
+            .level(72)
+            .plantXP(129.5)
+            .plantQuantity(1)
+            .checkHealthXP(12096)
+            .harvestXP(48.5)
+            .minHarvestQuantity(6)
+            .maxHarvestQuantity(6)
+            .patchType(FarmingPatchType.CALQUAT)
+            .build()),
 
+    CRYSTAL_ACORN(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.CRYSTAL_ACORN, ItemID.CRYSTAL_SAPLING, ItemID.CRYSTAL_SEEDLING, ItemID.CRYSTAL_SEEDLING_W))
+            .name("crystal shard")
+            .plural_name("crystal shards")
+            .level(74)
+            .plantXP(126)
+            .plantQuantity(1)
+            .checkHealthXP(13240)
+            .minHarvestQuantity(8) //We don't know if this uses harvest lives or not, wiki less clear
+            .maxHarvestQuantity(16)
+            .patchType(FarmingPatchType.CRYSTAL)
+            .build()),
 
+    SPIRIT_TREE(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.SPIRIT_SEED, ItemID.SPIRIT_SAPLING, ItemID.SPIRIT_SEEDLING, ItemID.SPIRIT_SEEDLING_W))
+            .name("spirit tree")
+            .plural_name("spirit trees")
+            .level(83)
+            .plantXP(199.5)
+            .plantQuantity(1)
+            .checkHealthXP(19301.8)
+            .patchType(FarmingPatchType.SPIRIT_TREE)
+            .build()),
+
+    CELASTRUS_SEED(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.CELASTRUS_SEED))
+            .name("celastrus bark")
+            .plural_name("celatrus barks")
+            .level(85)
+            .plantXP(200)
+            .plantQuantity(1)
+            .checkHealthXP(14130)
+            .harvestXP(23.5)
+            .minCTS(150) //We don't actually know this value, this has been coded in as an interim number
+            .maxCTS(210) //We don't actually know this value, this has been coded in as an interim number
+            .patchType(FarmingPatchType.CELASTRUS)
+            .build()),
+
+    REDWOOD_TREE(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.REDWOOD_TREE_SEED, ItemID.REDWOOD_SAPLING, ItemID.REDWOOD_SEEDLING, ItemID.REDWOOD_SEEDLING_W))
+            .name("redwood tree")
+            .plural_name("redwood trees")
+            .level(90)
+            .plantXP(230)
+            .plantQuantity(1)
+            .checkHealthXP(22450)
+            .patchType(FarmingPatchType.REDWOOD)
+            .build()),
+
+    CACTUS_SEED(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.CACTUS_SEED))
+            .name("cactus spine")
+            .plural_name("cactus spines")
+            .level(55)
+            .plantXP(66.5)
+            .plantQuantity(1)
+            .checkHealthXP(374)
+            .harvestXP(25)
+            .minCTS(5) //We don't actually know this value, this has been coded in as an interim number
+            .maxCTS(166) //We don't actually know this value, this has been coded in as an interim number
+            .patchType(FarmingPatchType.CACTUS)
+            .build()),
+
+    POTATO_CACTUS_SEED(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.POTATO_CACTUS_SEED))
+            .name("potato cactus")
+            .plural_name("potato cacti")
+            .level(64)
+            .plantXP(68)
+            .plantQuantity(1)
+            .checkHealthXP(230)
+            .harvestXP(68)
+            .minCTS(5) //We don't actually know this value, this has been coded in as an interim number
+            .maxCTS(166) //We don't actually know this value, this has been coded in as an interim number
+            .patchType(FarmingPatchType.CACTUS)
+            .build()),
     ;
 
     private static final Map<Integer, List<FarmingItem>> idsToFarmingItem = new HashMap<>();

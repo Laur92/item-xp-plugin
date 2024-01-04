@@ -282,6 +282,20 @@ public class FarmingXP
                 return "Hespori";
             case ANIMA:
                 return "Anima";
+            case HARDWOOD:
+                return "Hardwood tree";
+            case CALQUAT:
+                return "Calquat";
+            case CRYSTAL:
+                return "Crystal tree";
+            case SPIRIT_TREE:
+                return "Spirit tree";
+            case CELASTRUS:
+                return "Celastrus";
+            case REDWOOD:
+                return "Redwood tree";
+            case CACTUS:
+                return "Cactus";
             default:
                 return "Unknown";
         }
@@ -323,6 +337,8 @@ public class FarmingXP
                 case HOP:
                 case SEAWEED:
                 case BELLADONNA:
+                case CELASTRUS:
+                case CACTUS:
                     //Harvest Lives
                     minHarvestQuantity = compost.getHarvestLives() * numTimes;
                     maxHarvestQuantity = 0;
@@ -338,14 +354,20 @@ public class FarmingXP
                     break;
                 case FLOWER:
                 case BUSH:
+                case FRUIT_TREE:
                 case MUSHROOM:
                 case HESPORI:
+                case CALQUAT:
+                case CRYSTAL:
                     //Fixed
                     minHarvestQuantity = item.getMinHarvestQuantity() * numTimes;
                     maxHarvestQuantity = item.getMaxHarvestQuantity() * numTimes;
                     break;
                 case TREE:
                 case ANIMA:
+                case HARDWOOD:
+                case SPIRIT_TREE:
+                case REDWOOD:
                     //Harvest not applicable
                     minHarvestQuantity = 0;
                     maxHarvestQuantity = 0;
