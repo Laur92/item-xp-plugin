@@ -722,6 +722,98 @@ public enum FarmingItems
             .patchType(FarmingPatchType.FRUIT_TREE)
             .build()),
 
+    GIANT_SEAWEED(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.SEAWEED_SPORE))
+            .name("giant seaweed")
+            .plural_name("giant seaweed")
+            .level(23)
+            .plantXP(19)
+            .plantQuantity(1)
+            .harvestXP(21)
+            .minCTS(150)
+            .maxCTS(210)
+            .patchType(FarmingPatchType.SEAWEED)
+            .build()),
+
+    GRAPE_VINE(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.GRAPE_SEED))
+            .name("grapes")
+            .plural_name("grapes")
+            .level(36)
+            .plantXP(31.5)
+            .plantQuantity(1)
+            .checkHealthXP(625)
+            .harvestXP(40)
+            .minCTS(150) //We don't actually know this value, this has been coded in as an interim number
+            .maxCTS(210) //We don't actually know this value, this has been coded in as an interim number
+            .patchType(FarmingPatchType.GRAPE)
+            .build()),
+
+    BITTERCAP_MUSHROOM(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.MUSHROOM_SPORE))
+            .name("bittercap mushrooms")
+            .plural_name("bittercap mushrooms")
+            .level(53)
+            .plantXP(61.5)
+            .plantQuantity(1)
+            .harvestXP(57.7)
+            .minHarvestQuantity(6)
+            .maxHarvestQuantity(6)
+            .patchType(FarmingPatchType.MUSHROOM)
+            .build()),
+
+    NIGHTSHADE(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.BELLADONNA_SEED))
+            .name("nightshade")
+            .plural_name("nightshades")
+            .level(63)
+            .plantXP(91)
+            .plantQuantity(1)
+            .harvestXP(512)
+            .minCTS(150) //We don't actually know this value, this has been coded in as an interim number
+            .maxCTS(210) //We don't actually know this value, this has been coded in as an interim number
+            .patchType(FarmingPatchType.BELLADONNA)
+            .build()),
+
+    HESPORI(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.HESPORI_SEED))
+            .name("hespori")
+            .plural_name("hesporis")
+            .level(65)
+            .plantXP(62)
+            .plantQuantity(1)
+            .harvestXP(12600)
+            .minHarvestQuantity(1)
+            .maxHarvestQuantity(1)
+            .patchType(FarmingPatchType.HESPORI)
+            .build()),
+
+    KRONOS(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.KRONOS_SEED))
+            .level(76)
+            .plantXP(100)
+            .plantQuantity(1)
+            .patchType(FarmingPatchType.ANIMA)
+            .build()),
+
+    IASOR(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.IASOR_SEED))
+            .level(76)
+            .plantXP(100)
+            .plantQuantity(1)
+            .patchType(FarmingPatchType.ANIMA)
+            .build()),
+
+    ATTAS(FarmingItem.builder()
+            .itemIDs(ImmutableSet.of(ItemID.ATTAS_SEED))
+            .level(76)
+            .plantXP(100)
+            .plantQuantity(1)
+            .patchType(FarmingPatchType.ANIMA)
+            .build()),
+
+
+
 
 
     ;

@@ -270,6 +270,18 @@ public class FarmingXP
                 return "Tree";
             case FRUIT_TREE:
                 return "Fruit tree";
+            case SEAWEED:
+                return "Seaweed";
+            case GRAPE:
+                return "Vine";
+            case MUSHROOM:
+                return "Mushroom";
+            case BELLADONNA:
+                return "Belladonna";
+            case HESPORI:
+                return "Hespori";
+            case ANIMA:
+                return "Anima";
             default:
                 return "Unknown";
         }
@@ -278,18 +290,19 @@ public class FarmingXP
     @Getter
     private class FarmingXPCalc
     {
-        private double plantXP;
-        private double checkHealthXP;
+        private final double plantXP;
+        private final double checkHealthXP;
 
-        private double minHarvestXP;
-        private double maxHarvestXP;
-        private double expectedHarvestXP;
+        private final double minHarvestXP;
+        private final double maxHarvestXP;
+        private final double expectedHarvestXP;
 
-        private int minHarvestQuantity;
-        private int maxHarvestQuantity;
-        private int expectedHarvestQuantity;
+        private final int minHarvestQuantity;
+        private final int maxHarvestQuantity;
+        private final int expectedHarvestQuantity;
 
         private boolean usesHarvestLives;
+        private int harvestLives;
 
         public FarmingXPCalc(FarmingItem item)
         {
@@ -308,18 +321,38 @@ public class FarmingXP
                 case ALLOTMENT:
                 case HERB:
                 case HOP:
+                case SEAWEED:
+                case BELLADONNA:
                     //Harvest Lives
                     minHarvestQuantity = compost.getHarvestLives() * numTimes;
+                    maxHarvestQuantity = 0;
                     usesHarvestLives = true;
+                    harvestLives = compost.getHarvestLives();
+                    break;
+                case GRAPE:
+                    //Harvest Lives
+                    minHarvestQuantity = 5;
+                    maxHarvestQuantity = 0;
+                    usesHarvestLives = true;
+                    harvestLives = 5;
                     break;
                 case FLOWER:
                 case BUSH:
+                case MUSHROOM:
+                case HESPORI:
                     //Fixed
                     minHarvestQuantity = item.getMinHarvestQuantity() * numTimes;
                     maxHarvestQuantity = item.getMaxHarvestQuantity() * numTimes;
                     break;
                 case TREE:
+                case ANIMA:
                     //Harvest not applicable
+                    minHarvestQuantity = 0;
+                    maxHarvestQuantity = 0;
+                    break;
+                default:
+                    minHarvestQuantity = 0;
+                    maxHarvestQuantity = 0;
                     break;
             }
 
@@ -327,7 +360,7 @@ public class FarmingXP
             {
                 expectedHarvestQuantity = (int)Math.round(
                         calculateExpectedYield(client.getBoostedSkillLevel(Skill.FARMING),
-                                item.getMinCTS(), item.getMaxCTS(), compost.getHarvestLives()) * numTimes);
+                                item.getMinCTS(), item.getMaxCTS(), harvestLives, item.getPatchType()) * numTimes);
             }
             else
             {
@@ -350,13 +383,17 @@ public class FarmingXP
 
         //Formula from: https://oldschool.runescape.wiki/w/Farming#Variable_crop_yield
         //CTS values from: https://oldschool.runescape.wiki/w/Talk:Farming#Yield_rates_of_various_crops
-        private double calculateExpectedYield(int farmingLevel, int minCTS, int maxCTS, int harvestLives)
+        private double calculateExpectedYield(int farmingLevel, int minCTS, int maxCTS, int harvestLives, FarmingPatchType patchType)
         {
             double modifiedMinCTS = minCTS;
             double modifiedMaxCTS = maxCTS;
 
             double itemBoost = 0;
-            if(config.farmingUsingMagicSecateurs())
+            // Per https://twitter.com/JagexAsh/status/1691110392443899904, some patches ignore secateurs
+            if(config.farmingUsingMagicSecateurs()
+                    && patchType != FarmingPatchType.CACTUS
+                    && patchType != FarmingPatchType.BELLADONNA
+                    && patchType != FarmingPatchType.SEAWEED)
             {
                 itemBoost += 0.1;
             }
