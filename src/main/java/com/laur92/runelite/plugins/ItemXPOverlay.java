@@ -1,7 +1,7 @@
 package com.laur92.runelite.plugins;
 
 import com.google.inject.Inject;
-import com.laur92.runelite.plugins.skills.FarmingXP;
+import com.laur92.runelite.plugins.skills.farming.FarmingXP;
 import net.runelite.api.Client;
 import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.InterfaceID;

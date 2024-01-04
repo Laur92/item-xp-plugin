@@ -1,7 +1,6 @@
-package com.laur92.runelite.plugins.skills;
+package com.laur92.runelite.plugins.skills.farming;
 
 import com.laur92.runelite.plugins.ItemXPConfig;
-import com.laur92.runelite.plugins.skills.farming.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
@@ -12,7 +11,6 @@ import net.runelite.client.ui.SkillColor;
 import net.runelite.client.util.ColorUtil;
 
 import javax.inject.Inject;
-
 import java.awt.*;
 import java.text.DecimalFormat;
 
