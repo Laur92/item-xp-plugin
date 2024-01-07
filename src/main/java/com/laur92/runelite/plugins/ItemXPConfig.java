@@ -1,10 +1,8 @@
 package com.laur92.runelite.plugins;
 
 import com.laur92.runelite.plugins.skills.farming.Compost;
-import net.runelite.client.config.Config;
-import net.runelite.client.config.ConfigGroup;
-import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.ConfigSection;
+import com.laur92.runelite.plugins.skills.prayer.POHAltar;
+import net.runelite.client.config.*;
 
 @ConfigGroup("itemXP")
 public interface ItemXPConfig extends Config
@@ -19,6 +17,11 @@ public interface ItemXPConfig extends Config
     String FARMING_MAGIC_SECATEURS = "FARMING_MAGIC_SECATEURS";
     String FARMING_SKILL_CAPE = "FARMING_SKILL_CAPE";
     String FARMING_ATTAS = "FARMING_ATTAS";
+    String PRAYER_SHOW_ECTO = "PRAYER_SHOW_ECTO";
+    String PRAYER_POH_ALTAR = "PRAYER_POH_ALTAR";
+    String PRAYER_POH_BURNERS = "PRAYER_POH_BURNERS";
+    String PRAYER_CHAOS_TEMPLE = "PRAYER_CHAOS_TEMPLE";
+    String PRAYER_OFFERING_SPELLS = "PRAYER_OFFERING_SPELLS";
 
 
 
@@ -155,6 +158,55 @@ public interface ItemXPConfig extends Config
             description = "If you have an attas plant growing in the anima patch at the Farming Guild"
     )
     default boolean farmingUsingAttas() { return false; }
+
+
+    @ConfigItem(
+            position = 0,
+            keyName = PRAYER_SHOW_ECTO,
+            name = "Show Ecto",
+            section = prayerSkillSection,
+            description = "Show ectofuntus worship experience on bones",
+            warning = "Ectofuntus related XP will always show on bonemeal"
+    )
+    default boolean prayerShowEcto() { return true; }
+
+    @ConfigItem(
+            position = 1,
+            keyName = PRAYER_POH_ALTAR,
+            name = "POH Altar",
+            section = prayerSkillSection,
+            description = "Type of altar for POH offering"
+    )
+    default POHAltar prayerPOHAltar() { return POHAltar.GILDED; }
+
+    @ConfigItem(
+            position = 2,
+            keyName = PRAYER_POH_BURNERS,
+            name = "POH Burners",
+            section = prayerSkillSection,
+            description = "Number of burners active for POH offering. This setting does nothing if No Altar is chosen above"
+    )
+    @Range(min = 0, max = 2)
+    default int prayerPOHBurners() { return 2; }
+
+    @ConfigItem(
+            position = 3,
+            keyName = PRAYER_CHAOS_TEMPLE,
+            name = "Show Chaos Temple",
+            section = prayerSkillSection,
+            description = "Show chaos temple offering experience on bones"
+    )
+    default boolean prayerChaosTemple() { return true; }
+
+    @ConfigItem(
+            position = 4,
+            keyName = PRAYER_OFFERING_SPELLS,
+            name = "Show Offering Spells",
+            section = prayerSkillSection,
+            description = "Show demonic/sinister offering spell experience on demonic ashes/bones (requires 84/92 magic and arceuus spellbook)"
+    )
+    default boolean prayerOfferingSpells() { return true; }
+
 
 
 }
