@@ -49,4 +49,10 @@ public enum Compost
 
         return idsToCompost.get(itemID);
     }
+
+    @Override
+    public String toString()
+    {
+        return this.compost.getName();
+    }
 }

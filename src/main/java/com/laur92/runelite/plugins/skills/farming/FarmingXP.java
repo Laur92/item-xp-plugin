@@ -12,9 +12,9 @@ import net.runelite.client.util.ColorUtil;
 
 import javax.inject.Inject;
 import java.awt.*;
-import java.text.DecimalFormat;
 
 import static com.laur92.runelite.plugins.ItemXPPlugin.NEW_LINE;
+import static com.laur92.runelite.plugins.ItemXPPlugin.df;
 
 @Slf4j
 public class FarmingXP
@@ -25,7 +25,6 @@ public class FarmingXP
     private static final Color plantColor = new Color(99, 46, 23);
     private static final Color checkHealthColor = new Color(92, 217, 197);
     private static final Color harvestColor = new Color(18, 121, 7);
-    private static final DecimalFormat df = new DecimalFormat("#,##0.#");
 
     @Inject
     public FarmingXP(ItemXPConfig config, Client client)

@@ -8,6 +8,9 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 @PluginDescriptor(
 	name = "Item XP",
 	description = "A plugin that adds xp potential tooltips on items",
@@ -20,6 +23,12 @@ public class ItemXPPlugin extends Plugin
 	@Inject	private OverlayManager overlayManager;
 
 	public static final String NEW_LINE = "</br>";
+	public static final DecimalFormat df = new DecimalFormat("#,##0.#");
+
+	static
+	{
+		df.setRoundingMode(RoundingMode.FLOOR);
+	}
 
 	@Override
 	protected void startUp()
