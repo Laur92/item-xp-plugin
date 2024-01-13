@@ -90,11 +90,9 @@ public class PrayerXP
                 break;
             case ENRICHED_BONE:
                 addLine(sb, "Strange machine", item.getXp(), quantity, null);
-                //strange machine
                 break;
             case GOBLIN_PRIEST_BONE:
                 addLine(sb, "Bury in Yu'biusk", item.getXp(), quantity, null);
-                //bury at yu'biusk
                 break;
             case ASHES:
                 addLine(sb, "Scatter", item.getXp(), quantity, null);
