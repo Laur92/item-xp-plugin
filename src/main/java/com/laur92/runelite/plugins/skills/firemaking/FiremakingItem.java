@@ -13,7 +13,7 @@ public class FiremakingItem
 {
     private Set<Integer> itemIDs;
     private FiremakingItemType itemType;
-    private int level;
+    @Builder.Default private int level = 1;
     private int minSacredOilDoses;
     private double xp;
 }

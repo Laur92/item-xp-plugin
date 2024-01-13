@@ -13,6 +13,6 @@ public class PrayerItem
 {
     private Set<Integer> itemIDs;
     private PrayerItemType itemType;
-    private int level;
+    @Builder.Default private int level = 1;
     private double xp;
 }

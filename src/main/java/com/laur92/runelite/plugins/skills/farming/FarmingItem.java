@@ -12,7 +12,7 @@ public class FarmingItem
     private Set<Integer> itemIDs;
     private String name;
     private String plural_name;
-    private int level;
+    @Builder.Default private int level = 1;
     private FarmingPatchType patchType;
     private double plantXP;
     private int plantQuantity;
