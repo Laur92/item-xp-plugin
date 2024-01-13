@@ -1,12 +1,16 @@
 package com.laur92.runelite.plugins;
 
+import com.laur92.runelite.plugins.skills.ItemXPVersion;
 import com.laur92.runelite.plugins.skills.farming.Compost;
 import com.laur92.runelite.plugins.skills.prayer.POHAltar;
 import net.runelite.client.config.*;
 
-@ConfigGroup("itemXP")
+@ConfigGroup(ItemXPConfig.CONFIG_GROUP)
 public interface ItemXPConfig extends Config
 {
+    String CONFIG_GROUP = "itemXP";
+    String PLUGIN_VERSION = "PLUGIN_VERSION";
+
     String SHOW_LEVEL_REQUIREMENT = "SHOW_LEVEL_REQUIREMENT";
     String SHOW_STACK_CALCULATIONS = "SHOW_STACK_CALCULATIONS";
     String SHOW_SKILL_FARMING = "SHOW_SKILL_FARMING";
@@ -22,8 +26,6 @@ public interface ItemXPConfig extends Config
     String PRAYER_POH_BURNERS = "PRAYER_POH_BURNERS";
     String PRAYER_CHAOS_TEMPLE = "PRAYER_CHAOS_TEMPLE";
     String PRAYER_OFFERING_SPELLS = "PRAYER_OFFERING_SPELLS";
-
-
 
     @ConfigSection(
             name = "Overall",
@@ -56,6 +58,16 @@ public interface ItemXPConfig extends Config
     String prayerSkillSection = "PRAYER_SKILL_SECTION";
 
 
+    @ConfigItem(
+            position = -1,
+            keyName = PLUGIN_VERSION,
+            name = "Plugin Version",
+            section = overallSection,
+            description = "Last loaded plugin version",
+            secret = true,
+            hidden = true
+    )
+    default String pluginVersion() { return "0.1"; }
 
     @ConfigItem(
             position = 0,

@@ -15,8 +15,6 @@ import static com.laur92.runelite.plugins.ItemXPPlugin.df;
 
 public class PrayerXP
 {
-    /* gilded: 2.5-3-3.5; chaos: 3.5(x2); sinster: 3 */
-
     private final ItemXPConfig config;
     private final Client client;
 
