@@ -14,6 +14,8 @@ public interface ItemXPConfig extends Config
     String SHOW_STACK_CALCULATIONS = "SHOW_STACK_CALCULATIONS";
     String SHOW_SKILL_FARMING = "SHOW_SKILL_FARMING";
     String SHOW_SKILL_PRAYER = "SHOW_SKILL_PRAYER";
+    String SHOW_SKILL_FIREMAKING = "SHOW_SKILL_FIREMAKING";
+    String SHOW_SKILL_FLETCHING = "SHOW_SKILL_FLETCHING";
     String FARMING_SHOW_RANGE = "FARMING_SHOW_RANGE";
     String FARMING_SHOW_EXPECTED_YIELD = "FARMING_SHOW_EXPECTED_YIELD";
     String FARMING_COMPOST_TYPE = "FARMING_COMPOST_TYPE";
@@ -25,6 +27,8 @@ public interface ItemXPConfig extends Config
     String PRAYER_POH_BURNERS = "PRAYER_POH_BURNERS";
     String PRAYER_CHAOS_TEMPLE = "PRAYER_CHAOS_TEMPLE";
     String PRAYER_OFFERING_SPELLS = "PRAYER_OFFERING_SPELLS";
+    String FIREMAKING_SHOW_CAMPFIRE = "FIREMAKING_SHOW_CAMPFIRE";
+    String FIREMAKING_SHOW_PYRE = "FIREMAKING_SHOW_PYRE";
 
     @ConfigSection(
             name = "Overall",
@@ -55,6 +59,14 @@ public interface ItemXPConfig extends Config
             closedByDefault = true
     )
     String prayerSkillSection = "PRAYER_SKILL_SECTION";
+
+    @ConfigSection(
+            name = "Firemaking",
+            description = "Firemaking specific settings",
+            position = 4,
+            closedByDefault = true
+    )
+    String firemakingSkillSection = "FIREMAKING_SKILL_SECTION";
 
 
     @ConfigItem(
@@ -110,6 +122,30 @@ public interface ItemXPConfig extends Config
             description = "Show prayer related XP on items"
     )
     default boolean showPrayerSkill()
+    {
+        return true;
+    }
+
+    @ConfigItem(
+            position = 2,
+            keyName = SHOW_SKILL_FIREMAKING,
+            name = "Firemaking",
+            section = skillsSection,
+            description = "Show firemaking related XP on items"
+    )
+    default boolean showFiremakingSkill()
+    {
+        return true;
+    }
+
+    @ConfigItem(
+            position = 3,
+            keyName = SHOW_SKILL_FLETCHING,
+            name = "Fletching",
+            section = skillsSection,
+            description = "Show fletching related XP on items"
+    )
+    default boolean showFletchingSkill()
     {
         return true;
     }
@@ -176,8 +212,7 @@ public interface ItemXPConfig extends Config
             keyName = PRAYER_SHOW_ECTO,
             name = "Show Ecto",
             section = prayerSkillSection,
-            description = "Show ectofuntus worship experience on bones",
-            warning = "Ectofuntus related XP will always show on bonemeal"
+            description = "Show ectofuntus worship experience on bones"
     )
     default boolean prayerShowEcto() { return true; }
 
@@ -217,6 +252,24 @@ public interface ItemXPConfig extends Config
             description = "Show demonic/sinister offering spell experience on demonic ashes/bones (requires 84/92 magic and arceuus spellbook)"
     )
     default boolean prayerOfferingSpells() { return true; }
+
+    @ConfigItem(
+            position = 0,
+            keyName = FIREMAKING_SHOW_CAMPFIRE,
+            name = "Show Campfire",
+            section = firemakingSkillSection,
+            description = "Show campfire related experience on logs"
+    )
+    default boolean firemakingShowCampfire() { return true; }
+
+    @ConfigItem(
+            position = 0,
+            keyName = FIREMAKING_SHOW_PYRE,
+            name = "Show Pyre",
+            section = firemakingSkillSection,
+            description = "Show experience for turning logs into pyre logs"
+    )
+    default boolean firemakingShowPyre() { return true; }
 
 
 
