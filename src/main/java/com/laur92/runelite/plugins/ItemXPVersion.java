@@ -1,6 +1,5 @@
-package com.laur92.runelite.plugins.skills;
+package com.laur92.runelite.plugins;
 
-import com.laur92.runelite.plugins.ItemXPConfig;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.client.callback.ClientThread;

@@ -1,6 +1,5 @@
 package com.laur92.runelite.plugins;
 
-import com.laur92.runelite.plugins.skills.ItemXPVersion;
 import com.laur92.runelite.plugins.skills.farming.Compost;
 import com.laur92.runelite.plugins.skills.prayer.POHAltar;
 import net.runelite.client.config.*;
