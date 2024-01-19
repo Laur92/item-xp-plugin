@@ -24,5 +24,7 @@ You just hover over an item and a tooltip will be added showing how much xp can 
 ## Supported Skills
 
 - Farming
+- Prayer
+- Firemaking
  
 *Other skills will be added in future updates.*
