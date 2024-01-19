@@ -70,7 +70,6 @@ public interface ItemXPConfig extends Config
 
 
     @ConfigItem(
-            position = -1,
             keyName = PLUGIN_VERSION,
             name = "Plugin Version",
             section = overallSection,

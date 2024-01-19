@@ -18,7 +18,7 @@ import java.text.DecimalFormat;
 @PluginDescriptor(
 	name = "Item XP",
 	description = "A plugin that adds xp potential tooltips on items",
-	tags = {"item", "xp", "farming", "prayer"}
+	tags = {"item", "xp", "farming", "prayer", "firemaking"}
 )
 @Slf4j
 public class ItemXPPlugin extends Plugin

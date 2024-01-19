@@ -51,7 +51,7 @@ public class ItemXPVersion
         switch(versionNumber)
         {
             case "0.2":
-                return "Prayer, Firemaking and Fletching have been added!";
+                return "Prayer and Firemaking have been added!";
             default:
                 return null;
         }

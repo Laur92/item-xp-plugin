@@ -24,7 +24,7 @@ dependencies {
 }
 
 group = 'com.laur92.runelite.plugins'
-version = '0.2-SNAPSHOT'
+version = '0.2'
 
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = 'UTF-8'
