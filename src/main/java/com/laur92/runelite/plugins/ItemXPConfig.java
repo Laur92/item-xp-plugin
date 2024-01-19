@@ -142,7 +142,8 @@ public interface ItemXPConfig extends Config
             keyName = SHOW_SKILL_FLETCHING,
             name = "Fletching",
             section = skillsSection,
-            description = "Show fletching related XP on items"
+            description = "Show fletching related XP on items",
+            hidden = true
     )
     default boolean showFletchingSkill()
     {
