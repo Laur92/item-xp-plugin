@@ -307,7 +307,7 @@ public enum FarmingItems
             .build()),
 
     KWUARM_SEED(FarmingItem.builder()
-            .itemIDs(ImmutableSet.of(ItemID.HARRALANDER_SEED))
+            .itemIDs(ImmutableSet.of(ItemID.KWUARM_SEED))
             .name("kwuarm leaf")
             .plural_name("kwuarm leaves")
             .level(56)
